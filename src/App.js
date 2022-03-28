@@ -1,8 +1,7 @@
 import 'regenerator-runtime/runtime'
 import { useEffect, useState } from 'react'
-import ListExhibitions from './components/ListExhibitions.js'
-import CreateExhibition from './components/CreateExhibitions.js'
-import AddArtist from './components/AddArtists.js'
+import ListEvents from './components/ListEvents.js'
+import CreateEvent from './components/CreateEvents.js'
 import React from 'react'
 import { login, logout } from './utils'
 import './global.css'
@@ -12,38 +11,41 @@ import getConfig from './config'
 const { networkId } = getConfig(process.env.NODE_ENV || 'development')
 
 export default function App() {
-
-  const [exhibitions, setExhibitions] = useState([])
+  // use React Hooks to store greeting in component state
+  const [events, setEvents] = useState([])
   const [toggleModal, setToggleModal] = useState(false)
 
 
-  function addExhibition() {
+  function addProject() {
     setToggleModal(!toggleModal)
   }
 
-  function addArtist() {
-    setToggleModal(!toggleModal)
-  }
-
+  // The useEffect hook can be used to fire side-effects during render
+  // Learn more: https://reactjs.org/docs/hooks-intro.html
   useEffect(
     () => {
-
+      // in this case, we only care to query the contract when signed in
       if (window.walletConnection.isSignedIn()) {
-
-        window.contract.list_exhibitions().then((exhibitionprojects) => {
-          const exhibitionList = [...exhibitionprojects]
-          setExhibitions(exhibitionList)
+        // window.contract is set by initContract in index.js
+        window.contract.list_events().then((eventprojects) => {
+          const eventList = [...eventprojects]
+          setEvents(eventList)
         })
       }
     },
 
+    // The second argument to useEffect tells React when to re-run the effect
+    // Use an empty array to specify "only run on first render"
+    // This works because signing into NEAR Wallet reloads the page
+    // [crowdfunds],
     [],
   )
 
+  // if not signed in, return early with sign-in prompt
   if (!window.walletConnection.isSignedIn()) {
     return (
       <main className='signin'>
-        <h1>Welcome to Awesome Exhibitions</h1>
+        <h1>Welcome to Awesome Events</h1>
         <p style={{ textAlign: 'center' }}>
           Click the button below to sign in:
         </p>
@@ -55,25 +57,22 @@ export default function App() {
   }
 
   return (
-   
+    // use React Fragment, <>, to avoid wrapping elements in unnecessary divs
     <>
       <header>
-        <div className="logo"></div>
+        <div ></div>
         <button className="link" style={{ float: 'right' }} onClick={logout}>
           Sign out <span className="id">{window.accountId}</span>
         </button>
       </header>
-      <button onClick={addExhibition}>Add an exhibition</button>
-      <button onClick={addArtist}>Add an artist</button>
-
+      <button onClick={addProject}>Add an event</button>
       <main>
-        <CreateExhibition toggleModal={toggleModal} />
-        <AddArtist toggleModal={toggleModal}/>
+        <CreateEvent toggleModal={toggleModal} />
         <section className='events'>
-          {exhibitions.map((exhibition, id) => {
+          {events.map((project, id) => {
             return (
               <div key={id}>
-                <ListExhibitions exhibition={exhibition} />
+                <ListEvents project={project} />
               </div>
             )
           })}
