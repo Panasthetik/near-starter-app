@@ -1,0 +1,20 @@
+{
+    "name": "near-starter-app",
+    "version": "0.1.0",
+    "license": "UNLICENSED",
+    "scripts": {
+      "start": "parcel src/index.html",
+      "build": "react-scripts build"
+    },
+    "devDependencies": {
+      "@parcel/utils": "^2.3.2",
+      "near-cli": "3.2.0",
+      "parcel": "^2.3.2",
+      "process": "^0.11.10"
+    },
+    "dependencies": {
+      "near-api-js": "0.44.2",
+      "react": "~17.0.1",
+      "react-dom": "~17.0.1"
+    }
+  }
