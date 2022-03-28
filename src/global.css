@@ -36,11 +36,11 @@ html {
     display: flex;
     justify-content: space-between;
   }
-  .logo{
+  /* .logo{
     background-image: url(assets/logo-white.svg);
     width: 70px;
     height: 70px;
-  }
+  } */
   a,
   .link {
     color: var(--primary);
@@ -220,9 +220,9 @@ html {
       --shadow: #2a2a2a;
       --light-gray: #444;
     }
-    h1 {
+    /* h1 {
       background-image: url(assets/logo-white.svg);
-    }
+    } */
     input:focus {
       box-shadow: 0 0 10em rgba(255, 255, 255, 0.02) inset;
     }
