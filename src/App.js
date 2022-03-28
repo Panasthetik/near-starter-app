@@ -12,7 +12,7 @@ import getConfig from './config'
 const { networkId } = getConfig(process.env.NODE_ENV || 'development')
 
 export default function App() {
-  // use React Hooks to store greeting in component state
+
   const [exhibitions, setExhibitions] = useState([])
   const [toggleModal, setToggleModal] = useState(false)
 
@@ -25,13 +25,11 @@ export default function App() {
     setToggleModal(!toggleModal)
   }
 
-  // The useEffect hook can be used to fire side-effects during render
-  // Learn more: https://reactjs.org/docs/hooks-intro.html
   useEffect(
     () => {
-      // in this case, we only care to query the contract when signed in
+
       if (window.walletConnection.isSignedIn()) {
-        // window.contract is set by initContract in index.js
+
         window.contract.list_exhibitions().then((exhibitionprojects) => {
           const exhibitionList = [...exhibitionprojects]
           setExhibitions(exhibitionList)
@@ -39,14 +37,9 @@ export default function App() {
       }
     },
 
-    // The second argument to useEffect tells React when to re-run the effect
-    // Use an empty array to specify "only run on first render"
-    // This works because signing into NEAR Wallet reloads the page
-    // [exhibitions],
     [],
   )
 
-  // if not signed in, return early with sign-in prompt
   if (!window.walletConnection.isSignedIn()) {
     return (
       <main className='signin'>
@@ -62,7 +55,7 @@ export default function App() {
   }
 
   return (
-    // use React Fragment, <>, to avoid wrapping elements in unnecessary divs
+   
     <>
       <header>
         <div className="logo"></div>
