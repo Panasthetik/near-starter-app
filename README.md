@@ -12,5 +12,5 @@ https://medium.com/coinmonks/an-intro-to-near-dapp-development-with-rust-wasm-pa
 https://medium.com/coinmonks/an-intro-to-near-dapp-development-with-rust-wasm-parcel-and-react-part-2-6bd3a071b74e
 
 
-## Part 3:
+# Part 3:
 https://medium.com/coinmonks/an-intro-to-near-dapp-development-with-rust-wasm-parcel-and-react-part-3-6e4782dce459
